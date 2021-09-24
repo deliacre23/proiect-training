@@ -17,8 +17,8 @@ import javax.validation.constraints.Email;
 @Table(	name = "users")
 public class User {
     @Id
-    @GeneratedValue
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(unique=true)
@@ -30,6 +30,9 @@ public class User {
 
     private String password;
 
+//  Eager Loading is a design pattern in which data initialization occurs on the spot
+//  Lazy Loading is a design pattern which is used to defer initialization of an object as long as it's possible
+//  Hibernate applies lazy loading approach on entities and associations by providing a proxy implementation of classes.
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(	name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
